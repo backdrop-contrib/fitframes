@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Fitvids module.
+ */
+
+/**
+ * Checks that the plugin exists before installing.
+ */
+function fitvids_requirements($phase) {
+  $requirements = array();
+  switch ($phase) {
+    case 'runtime':
+      $installed = file_exists(drupal_get_path('module', 'fitvids') . '/jquery.fitvids.js');
+      $requirements[] = array(
+        'title' => t('Fitvids library'),
+        'value' => $installed ? t('Installed') : t('Missing'),
+        'description' => t('Fitvids Javascript Library. Download it from !fitvids-site, copy it to the module directory and rename it to fitvids.min.js.', array(
+          '!fitvids-site' => l(t('here'), 'http://fitvidsjs.com/'),
+        )),
+        'severity' => $installed ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+      );
+      break;
+  }
+  return $requirements;
+}

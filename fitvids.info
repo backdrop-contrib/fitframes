@@ -1,0 +1,4 @@
+name = FitVids
+description = jQuery plugin for fluid width video embeds.
+core = 7.x
+files[] = fitvids.module
