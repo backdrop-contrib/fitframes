@@ -5,16 +5,26 @@ FitVids is a jQuery plugin for fluid width video embeds.
 
 It's useful if you are using a responsive theme (such as Omega), and want the videos to scale.
 
+
 INSTALLATION
 ------------
+  
+* Download the jquery.fitvids.js file from:
 
-Just enable the module. You do not need to configure anything.
+    https://github.com/davatron5000/FitVids.js
+	
+  and place it in the sites/all/modules/fitvids/ folder
+
+* Enable the module at Administration » Modules.
+
 
 CONFIGURATION
 -------------
 
-The module assumes that the videos to be resized are in an element with class="region".
-There isn't any UI yet - the next release will add an options page to allow you to specify your own jQuery selectors.
+* Go to the configuration screen at Administration » Configuration » Media » FitVids.
+
+* The default selector is ".region". Enter your own jQuery selectors. Use a new line for each selector.
+
 
 FURTHER INFO
 ------------
