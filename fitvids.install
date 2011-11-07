@@ -53,4 +53,7 @@ function fitvids_enable() {
 /**
  * Uninstall the module
  */
-// TODO delete the variable: fitvids_selectors
+function fitvids_uninstall() {
+	// Delete module variables
+	variable_del('fitvids_selectors');
+}
