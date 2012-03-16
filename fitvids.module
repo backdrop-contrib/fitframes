@@ -81,13 +81,23 @@ function fitvids_form($form, &$form_state) {
  * Include the FitVids.js script on every page
  */
 function fitvids_init() {
-  $installed = file_exists(drupal_get_path('module', 'fitvids') . '/jquery.fitvids.js');
+
+	// Is the library installed?
+	$path = libraries_get_path('fitvids') . '/jquery.fitvids.js';
+	$installed = file_exists($path);
   if (!$installed) {
-    return;
+	  return;
   }
-  
+	
   // TODO User should be able to choose which paths this should/shouldn't run on
-  
+	  
+	// Add the library reference
+	drupal_add_js($path, array(
+		'group' => JS_LIBRARY, 
+		'every_page' => TRUE,
+	));
+	
+	// Run fitvids
   $fitvids_selectors = variable_get('fitvids_selectors', DEFAULT_REGIONS);
   $fitvids_selectors_array = explode(PHP_EOL, $fitvids_selectors);
   
@@ -98,7 +108,30 @@ function fitvids_init() {
     $inline_code .= 'jQuery("' . $selector . '").fitVids();' . PHP_EOL;
   }
   
-  drupal_add_js($inline_code,
-    array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  drupal_add_js($inline_code, array(
+		'type' => 'inline', 
+		'scope' => 'footer', 
+		'weight' => 5,
+		'every_page' => TRUE,
+	));
+	
+	/*drupal_add_css('.field iframe{max-width:100%;}', array(
+		'type' => 'inline', 
+		'every_page' => TRUE,
+	));*/
+}
+
+/**
+ * Implements hook_library
+ */
+function fitvids_library() {
+  $libraries['fitvids'] = array(
+    'title' => 'FitVids.js',
+    'website' => 'https://github.com/davatron5000/FitVids.js',
+    'version' => '1.0',
+    'js' => array(
+      'jquery.fitvids.js' => array(),
+    ),
   );
+  return $libraries;
 }

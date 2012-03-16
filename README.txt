@@ -15,13 +15,13 @@ INSTALLATION
 	
   and place it in the sites/all/modules/fitvids/ folder
 
-* Enable the module at Administration » Modules.
+* Enable the module at Administration Â» Modules.
 
 
 CONFIGURATION
 -------------
 
-* Go to the configuration screen at Administration » Configuration » Media » FitVids.
+* Go to the configuration screen at Administration Â» Configuration Â» Media Â» FitVids.
 
 * The default selector is ".region". Enter your own jQuery selectors. Use a new line for each selector.
 
