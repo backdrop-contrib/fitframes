@@ -5,9 +5,9 @@
  */
 
 // Constants
-define("DEFAULT_REGIONS", '.region');
-define("PLUGIN_URL", 'https://github.com/davatron5000/FitVids.js');
-define("PLUGIN_FILENAME", 'jquery.fitvids.js');
+define("FITVIDS_DEFAULT_REGIONS", '.region');
+define("FITVIDS_PLUGIN_URL", 'https://github.com/davatron5000/FitVids.js');
+define("FITVIDS_PLUGIN_FILENAME", 'jquery.fitvids.js');
 
 /**
  * Implements hook_help.
@@ -75,9 +75,9 @@ function fitvids_form($form, &$form_state) {
 	$installed = file_exists($path);
   if (!$installed) {
 	  $message = t('You need to download the FitVids.js jQuery plugin to use this module. Download it from !fitvids-site, copy it to the !fitvids-library directory, and rename it to !fitvids-filename.', array(
-      '!fitvids-site' => l(t('here'), PLUGIN_URL),
+      '!fitvids-site' => l(t('here'), FITVIDS_PLUGIN_URL),
 			'!fitvids-library' => libraries_get_path('fitvids'),
-      '!fitvids-filename' => PLUGIN_FILENAME,
+      '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
     ));
     drupal_set_message(filter_xss_admin($message), $type = 'warning');;
   }
@@ -89,7 +89,7 @@ function fitvids_form($form, &$form_state) {
   $form['fitvids_selectors'] = array(
     '#type' => 'textarea',
     '#title' => t('Video containers'),
-    '#default_value' => variable_get('fitvids_selectors', DEFAULT_REGIONS),
+    '#default_value' => variable_get('fitvids_selectors', FITVIDS_DEFAULT_REGIONS),
     '#rows' => 3,
     '#description' => t('Enter some jQuery selectors for your video containers. Use a new line for each selector.'),
     '#required' => TRUE,
@@ -138,7 +138,7 @@ function fitvids_init() {
 	}
 	
 	// Run fitvids
-  $fitvids_selectors = variable_get('fitvids_selectors', DEFAULT_REGIONS);
+  $fitvids_selectors = variable_get('fitvids_selectors', FITVIDS_DEFAULT_REGIONS);
   $fitvids_selectors_array = explode(PHP_EOL, $fitvids_selectors);
   
 	// Run fitvids

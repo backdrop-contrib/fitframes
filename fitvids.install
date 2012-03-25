@@ -19,9 +19,9 @@ function fitvids_requirements($phase) {
         'title' => t('Fitvids library'),
         'value' => $installed ? t('Installed') : t('Missing'),
         'description' => t('Fitvids Javascript Library. Download it from !fitvids-site, copy it to the !fitvids-library directory, and rename it to !fitvids-filename.', array(
-          '!fitvids-site' => l(t('here'), PLUGIN_URL),
+          '!fitvids-site' => l(t('here'), FITVIDS_PLUGIN_URL),
 					'!fitvids-library' => libraries_get_path('fitvids'),
-          '!fitvids-filename' => PLUGIN_FILENAME,
+          '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
         )),
         'severity' => $installed ? REQUIREMENT_OK : REQUIREMENT_ERROR,
       );
@@ -38,9 +38,9 @@ function fitvids_enable() {
 	$installed = file_exists($path);
   if (!$installed) {
     $message = t('You need to download the FitVids.js jQuery plugin to use this module. Download it from !fitvids-site, copy it to the !fitvids-library directory, and rename it to !fitvids-filename.', array(
-      '!fitvids-site' => l(t('here'), PLUGIN_URL),
+      '!fitvids-site' => l(t('here'), FITVIDS_PLUGIN_URL),
 			'!fitvids-library' => libraries_get_path('fitvids'),
-      '!fitvids-filename' => PLUGIN_FILENAME,
+      '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
     ));
     drupal_set_message(filter_xss_admin($message), $type = 'warning');
   }
