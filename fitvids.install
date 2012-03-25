@@ -4,9 +4,7 @@
  * Install, update and uninstall functions for the Fitvids module.
  */
 
-// Constants
-define("PLUGIN_URL", 'https://github.com/davatron5000/FitVids.js');
-define("PLUGIN_FILENAME", 'jquery.fitvids.js');
+// Constants - see fitvids.module
 
 /**
  * If the plugin doesn't exist, show a warning on the status page
