@@ -10,13 +10,13 @@ define("FITVIDS_PLUGIN_URL", 'https://github.com/davatron5000/FitVids.js');
 define("FITVIDS_PLUGIN_FILENAME", 'jquery.fitvids.js');
 
 /**
- * Implements hook_help.
+ * Implements hook_help().
  *
  * Displays help and module information.
  *
- * @param path 
+ * @param path
  *   Which path of the site we're using to display help
- * @param arg 
+ * @param arg
  *   Array that holds the current path as returned from arg() function
  */
 function fitvids_help($path, $arg) {
@@ -42,15 +42,15 @@ function fitvids_permission() {
   return array(
     'administer fitvids' => array(
       'title' => t('Administer the FitVids module'),
-    )  
-  );  
+    )
+  );
 }
 
 /**
  * Implements hook_menu().
  */
 function fitvids_menu() {
-  $items = array();  
+  $items = array();
 
   $items['admin/config/media/fitvids'] = array(
     'title' => 'FitVids',
@@ -60,12 +60,12 @@ function fitvids_menu() {
     'access arguments' => array('administer fitvids'),
     'type' => MENU_NORMAL_ITEM,
   );
-  
+
   return $items;
 }
 
 /**
- * Configuraton form, called by drupal_get_form() 
+ * Configuraton form, called by drupal_get_form()
  * in current_posts_menu().
  */
 function fitvids_form($form, &$form_state) {
@@ -122,10 +122,10 @@ function fitvids_init() {
 
   // Add the library reference
   drupal_add_js($path, array(
-    'group' => JS_LIBRARY, 
+    'group' => JS_LIBRARY,
     'every_page' => TRUE,
   ));
-  
+
   // Generate the custom vendor selectors
   $fitvids_customselectors = variable_get('fitvids_customselectors', '');
   $fitvids_customselectors_array = explode(PHP_EOL, $fitvids_customselectors);
@@ -137,27 +137,35 @@ function fitvids_init() {
     $custom_selectors = '{ customSelector: "' . implode(',', $fitvids_customselectors_array) . '" }';
   }
 
-  // Run fitvids
+  // Get fitvids containers
   $fitvids_selectors = variable_get('fitvids_selectors', FITVIDS_DEFAULT_REGIONS);
   $fitvids_selectors_array = explode(PHP_EOL, $fitvids_selectors);
 
-  // Run fitvids
+  // Generate Drupal behaviour js
   $inline_code = '/* Output by FitVids module */' . PHP_EOL;
+  $inline_code .= '(function ($) {
+    Drupal.behaviors.fitvids = {
+      attach: function (context, settings) {';
+
   foreach ($fitvids_selectors_array as $selector) {
     $selector = trim($selector);
-    $inline_code .= 'jQuery("' . $selector . '").fitVids(' . $custom_selectors . ');' . PHP_EOL;
+    $inline_code .= '$("' . $selector . '", context).fitVids(' . $custom_selectors . ');' . PHP_EOL;
   }
 
+  $inline_code .= '}
+      };
+    }(jQuery));';
+
   drupal_add_js($inline_code, array(
-    'type' => 'inline', 
-    'scope' => 'footer', 
+    'type' => 'inline',
+    'scope' => 'footer',
     'weight' => 5,
     'every_page' => TRUE,
   ));
 }
 
 /**
- * Implements hook_library
+ * Implements hook_library().
  */
 function fitvids_library() {
   $libraries['fitvids'] = array(
