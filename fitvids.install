@@ -15,16 +15,29 @@ function fitvids_requirements($phase) {
     case 'runtime':
       $path = libraries_get_path('fitvids') . '/jquery.fitvids.js';
       $installed = file_exists($path);
-      $requirements[] = array(
-        'title' => t('Fitvids library'),
-        'value' => $installed ? t('Installed') : t('Missing'),
-        'description' => t('Fitvids Javascript Library. Download it from !fitvids-site, copy it to the !fitvids-library directory, and rename it to !fitvids-filename.', array(
-          '!fitvids-site' => l(t('here'), FITVIDS_PLUGIN_URL),
-          '!fitvids-library' => libraries_get_path('fitvids'),
-          '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
-        )),
-        'severity' => $installed ? REQUIREMENT_OK : REQUIREMENT_ERROR,
-      );
+      if (!$installed) {
+        $requirements[] = array(
+          'title' => t('FitVids jQuery plugin'),
+          'value' => t('Missing'),
+          'description' => t('The FitVids jQuery plugin is missing. Download it from !fitvids-site, copy it to the !fitvids-library directory, and rename it to !fitvids-filename.', array(
+            '!fitvids-site' => l(t('here'), FITVIDS_PLUGIN_URL),
+            '!fitvids-library' => libraries_get_path('fitvids'),
+            '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
+          )),
+          'severity' => REQUIREMENT_ERROR,
+        );
+      }
+      else {
+        $requirements[] = array(
+          'title' => t('FitVids jQuery plugin'),
+          'value' => t('Installed'),
+          'description' => t('FitVids is available at !fitvids-library/!fitvids-filename.', array(
+            '!fitvids-library' => libraries_get_path('fitvids'),
+            '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
+          )),
+          'severity' => REQUIREMENT_OK,
+        );
+      }
       break;
   }
   return $requirements;
