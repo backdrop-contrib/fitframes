@@ -145,7 +145,15 @@ function fitvids_init() {
   $inline_code = '/* Output by FitVids module */' . PHP_EOL;
   $inline_code .= '(function ($) {
     Drupal.behaviors.fitvids = {
-      attach: function (context, settings) {';
+      attach: function (context, settings) {' . PHP_EOL;
+      
+  // Play nice with Media's iframe wrappers, by removing explicit widths and heights
+  $inline_code .= 'if ($(".media-youtube-outer-wrapper").length) {' . PHP_EOL;
+  $inline_code .= ' $(".media-youtube-outer-wrapper").removeAttr("style");' . PHP_EOL;
+  $inline_code .= ' $(".media-youtube-preview-wrapper").removeAttr("style");' . PHP_EOL;
+  $inline_code .= ' $(".media-youtube-outer-wrapper").removeClass("media-youtube-outer-wrapper");' . PHP_EOL;
+  $inline_code .= ' $(".media-youtube-preview-wrapper").removeClass("media-youtube-preview-wrapper");' . PHP_EOL;
+  $inline_code .= '}' . PHP_EOL;
 
   foreach ($fitvids_selectors_array as $selector) {
     $selector = trim($selector);
