@@ -128,13 +128,18 @@ function fitvids_init() {
 
   // Generate the custom vendor selectors
   $fitvids_customselectors = variable_get('fitvids_customselectors', '');
-  $fitvids_customselectors_array = explode(PHP_EOL, $fitvids_customselectors);
-  $custom_selectors = '';
-  if (count($fitvids_customselectors_array) > 0) {
-    foreach ($fitvids_customselectors_array as $key => $value) {
-      $fitvids_customselectors_array[$key] = 'iframe[src^=\'' . trim($value) . '\']';
+  if ($fitvids_customselectors != '') {
+    $fitvids_customselectors_array = explode(PHP_EOL, $fitvids_customselectors);
+    $custom_selectors = '';
+    if (count($fitvids_customselectors_array) > 0) {
+      foreach ($fitvids_customselectors_array as $key => $value) {
+        $fitvids_customselectors_array[$key] = 'iframe[src^=\'' . trim($value) . '\']';
+      }
+      $custom_selectors = '{ customSelector: "' . implode(',', $fitvids_customselectors_array) . '" }';
     }
-    $custom_selectors = '{ customSelector: "' . implode(',', $fitvids_customselectors_array) . '" }';
+  }
+  else {
+    $custom_selectors = '';
   }
 
   // Get fitvids containers
