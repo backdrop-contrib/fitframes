@@ -26,7 +26,7 @@ function fitvids_help($path, $arg) {
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t("FitVids is a jQuery plugin for fluid width video embeds.") . '</p>';
       $output .= '<p>' . t("It's useful if you are using a responsive theme (such as Omega), and want the videos to scale.") . '</p>';
-      $output .= '<p>' . t("It currently supports Vimeo,YouTube, Blip.tv, Viddler, Kickstarter.") . '</p>';
+      $output .= '<p>' . t("By default it supports Vimeo, YouTube and Kickstarter.") . '</p>';
       $output .= '<h3>' . t('Further info') . '</h3>';
       $output .= '<p>' . t("There is an explanatory blog post at http://daverupert.com/2011/09/responsive-video-embeds-with-fitvids/") . '</p>';
       $output .= '<p>' . t("See the code at https://github.com/davatron5000/FitVids.js/") . '</p>';
@@ -83,7 +83,7 @@ function fitvids_form($form, &$form_state) {
   }
 
   $form['fitvids_intro'] = array(
-    '#markup' => '<p>FitVids is a jQuery plugin for fluid width video embeds. It currently supports Vimeo,YouTube, Blip.tv, Viddler, Kickstarter.</p>',
+    '#markup' => '<p>FitVids is a jQuery plugin for fluid width video embeds. By default, it supports YouTube, Vimeo and Kickstarter.</p>',
   );
 
   $form['fitvids_selectors'] = array(
@@ -100,7 +100,7 @@ function fitvids_form($form, &$form_state) {
     '#title' => t('Custom iframe URLs'),
     '#default_value' => variable_get('fitvids_customselectors', ''),
     '#rows' => 3,
-    '#description' => t('Only YouTube, Vimeo, Blip.tv, Viddler and Kickstarter are supported by default, but you can tell FitVids about videos from other sites by adding the domain of the player. <br />E.g., "http://www.dailymotion.com". Use a new line for each URL. You don\'t need to add add trailing slashes.'),
+    '#description' => t('Only YouTube, Vimeo and Kickstarter are supported by default, but you can tell FitVids about videos from other sites by adding the domain of the player. <br />E.g., "http://www.dailymotion.com". Use a new line for each URL. You don\'t need to add trailing slashes.'),
   );
 
   return system_settings_form($form);
