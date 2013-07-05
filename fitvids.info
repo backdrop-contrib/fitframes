@@ -3,3 +3,4 @@ description = jQuery plugin for fluid width video embeds.
 core = 7.x
 dependencies[] = libraries
 configure = admin/config/media/fitvids
+scripts[] = fitvids.js
