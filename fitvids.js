@@ -25,7 +25,7 @@
     
     // Fitvids!
     for (var x = 0; x < selectors.length; x ++) {
-      $(selectors[x]).fitVids();
+      $(selectors[x]).fitVids({customSelector: custom_domains});
     }
   }
 };
