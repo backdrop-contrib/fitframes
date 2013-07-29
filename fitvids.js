@@ -7,10 +7,21 @@
       $('body').fitVids();
     }
     else {
+      // Default settings values
+      var selectors = ['body'];
+      var simplifymarkup = true;
+      var custom_domains = [];
+      
       // Get settings for this behaviour
-      var selectors = settings.fitvids['selectors'];
-      var simplifymarkup = settings.fitvids['simplifymarkup'];
-      var custom_domains = settings.fitvids['custom_domains'].join();
+      if (typeof Drupal.settings.fitvids.selectors === 'undefined') {
+        selectors = settings.fitvids['selectors'];
+      }
+      if (typeof Drupal.settings.fitvids.simplifymarkup === 'undefined') {
+        simplifymarkup = settings.fitvids['simplifymarkup'];
+      }
+      if (typeof Drupal.settings.fitvids.custom_domains === 'undefined') {
+        custom_domains = settings.fitvids['custom_domains'];
+      }
           
       // Remove media wrappers
       if (simplifymarkup) {
