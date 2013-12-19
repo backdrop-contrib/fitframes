@@ -4,3 +4,4 @@ core = 7.x
 dependencies[] = libraries
 configure = admin/config/media/fitvids
 scripts[] = fitvids.js
+stylesheets[all][] = fitvids.css
