@@ -21,7 +21,7 @@
             if (typeof settings.fitvids.simplifymarkup !== 'undefined') {
               simplifymarkup = settings.fitvids.simplifymarkup;
             }
-            if (typeof settings.fitvids.custom_domains.length > 0) {
+            if (settings.fitvids.custom_domains.length > 0) {
               custom_domains = settings.fitvids.custom_domains;
             }
                 
