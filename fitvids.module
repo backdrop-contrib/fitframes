@@ -25,12 +25,10 @@ function fitvids_help($path, $arg) {
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t("FitVids is a jQuery plugin for fluid width video embeds.") . '</p>';
-      $output .= '<p>' . t("It's useful if you are using a responsive theme (such as Omega), and want the videos to scale.") . '</p>';
+      $output .= '<p>' . t("It's useful if you are using a responsive theme and want the videos to scale.") . '</p>';
       $output .= '<p>' . t("By default it supports Vimeo, YouTube and Kickstarter.") . '</p>';
       $output .= '<h3>' . t('jQuery plugin') . '</h3>';
       $output .= '<p>' . t("Download the plugin from " . FITVIDS_PLUGIN_URL) . '</p>';
-      $output .= '<h3>' . t('Compatibility') . '</h3>';
-      $output .= '<p>' . t("Older versions of the media_youtube and media_vimeo modules wrap videos in HTML which may stop FitVids working properly. You can configure FitVids to remove the unneccesary markup.") . '</p>';
       $output .= '<h3>' . t('Further info') . '</h3>';
       $output .= '<p>' . t("There is an explanatory blog post at http://daverupert.com/2011/09/responsive-video-embeds-with-fitvids/") . '</p>';
       $output .= '<p>' . t("See the code at https://github.com/davatron5000/FitVids.js/") . '</p>';
