@@ -8,6 +8,7 @@ It supports YouTube, Vimeo, Blip.tv and Kickstarter by default, and you should b
 
 It's useful if you are using a responsive theme and want the videos to scale.
 
+![FitVids](https://github.com/backdrop-contrib/fitvids/blob/1.x-1.x/images/fitvids.jpg "FitVids example")
 
 ## Configuration
 
