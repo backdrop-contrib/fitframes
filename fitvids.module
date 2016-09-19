@@ -215,3 +215,15 @@ function fitvids_library() {
   );
   return $libraries;
 }
+
+/**
+* Implements hook_config_info().
+*/
+function fitvids_config_info() {
+$prefixes['fitvids.settings'] = array(
+    'label' => t('FitVids'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
+}
+
