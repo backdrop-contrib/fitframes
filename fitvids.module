@@ -59,7 +59,7 @@ function fitvids_menu() {
   $items['admin/config/media/fitvids'] = array(
     'title' => 'FitVids',
     'description' => 'Configuration for FitVids module',
-    'page callback' => 'drupal_get_form',
+    'page callback' => 'backdrop_get_form',
     'page arguments' => array('fitvids_form'),
     'access arguments' => array('administer fitvids'),
     'type' => MENU_NORMAL_ITEM,
@@ -69,7 +69,7 @@ function fitvids_menu() {
 }
 
 /**
- * Configuraton form, called by drupal_get_form()
+ * Configuraton form, called by backdrop_get_form()
  * in current_posts_menu().
  */
 function fitvids_form($form, &$form_state) {
@@ -83,7 +83,7 @@ function fitvids_form($form, &$form_state) {
       '!fitvids-library' => libraries_get_path('fitvids'),
       '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
     ));
-    drupal_set_message(filter_xss_admin($message), $type = 'warning');
+    backdrop_set_message(filter_xss_admin($message), $type = 'warning');
   }
 
   $form['fitvids_intro'] = array(
@@ -119,7 +119,7 @@ function fitvids_form($form, &$form_state) {
 
 /**
  * Implements hook_page_build().
- * 
+ *
  * Include the FitVids.js script on every page
  */
 function fitvids_page_build(&$page) {
@@ -134,7 +134,7 @@ function fitvids_page_build(&$page) {
   // TODO User should be able to choose which paths this should/shouldn't run on
 
   // Add the library reference
-  drupal_add_js($path, array(
+  backdrop_add_js($path, array(
     'group' => JS_LIBRARY,
     'every_page' => TRUE,
   ));
@@ -159,12 +159,12 @@ function fitvids_page_build(&$page) {
   // Get fitvids containers
   $fitvids_selectors = variable_get('fitvids_selectors', FITVIDS_DEFAULT_REGIONS);
   $fitvids_selectors_array = explode(PHP_EOL, $fitvids_selectors);
-  
+
   // Simplify markup?
   $simplifymarkup = variable_get('fitvids_simplifymarkup', TRUE);
-  
+
   // Export the variables to Drupal.settings
-  drupal_add_js(array('fitvids' => array(
+  backdrop_add_js(array('fitvids' => array(
     'custom_domains' => $fitvids_customselectors_array,
     'selectors' => $fitvids_selectors_array,
     'simplifymarkup' => $simplifymarkup,

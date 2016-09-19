@@ -1,7 +1,8 @@
 name = FitVids
 description = jQuery plugin for fluid width video embeds.
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = libraries
 configure = admin/config/media/fitvids
-scripts[] = fitvids.js
-stylesheets[all][] = fitvids.css
+scripts[] = js/fitvids.js
+stylesheets[all][] = css/fitvids.css
