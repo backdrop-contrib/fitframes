@@ -74,18 +74,6 @@ function fitvids_admin_settings($form, &$form_state) {
 
   $config = config('fitvids.settings');
 
-  // Is the library installed?
-  $path = libraries_get_path('fitvids') . '/jquery.fitvids.js';
-  $installed = file_exists($path);
-  if (!$installed) {
-    $message = t('You need to download the FitVids.js jQuery plugin to use this module. Download it from !fitvids-site and copy it to !fitvids-library/!fitvids-filename.', array(
-      '!fitvids-site' => l(t('here'), FITVIDS_PLUGIN_URL),
-      '!fitvids-library' => libraries_get_path('fitvids'),
-      '!fitvids-filename' => FITVIDS_PLUGIN_FILENAME,
-    ));
-    backdrop_set_message(filter_xss_admin($message), $type = 'warning');
-  }
-
   $form['fitvids_intro'] = array(
     '#markup' => '<p>FitVids is a jQuery plugin for fluid width video embeds. By default, it supports YouTube, Vimeo and Kickstarter.</p>',
   );
@@ -154,21 +142,6 @@ function fitvids_preprocess_page(&$variables) {
   }
   $config = config('fitvids.settings');
 
-  // Is the library installed?
-  $path = libraries_get_path('fitvids') . '/jquery.fitvids.js';
-  $installed = file_exists($path);
-  if (!$installed) {
-    return;
-  }
-
-  // TODO User should be able to choose which paths this should/shouldn't run on
-
-  // Add the library reference
-  backdrop_add_js($path, array(
-    'group' => JS_LIBRARY,
-    'every_page' => TRUE,
-  ));
-
   // Generate the custom vendor selectors
   $fitvids_customselectors = $config->get('customselectors');
   $fitvids_customselectors_array = array();
@@ -193,27 +166,12 @@ function fitvids_preprocess_page(&$variables) {
   // Simplify markup?
   $simplifymarkup = $config->get('simplifymarkup');
 
-  // Export the variables to Drupal.settings
+  // Export the variables to Backdrop.settings
   backdrop_add_js(array('fitvids' => array(
     'custom_domains' => $fitvids_customselectors_array,
     'selectors' => $fitvids_selectors_array,
     'simplifymarkup' => $simplifymarkup,
   )), 'setting');
-}
-
-/**
- * Implements hook_library().
- */
-function fitvids_library() {
-  $libraries['fitvids'] = array(
-    'title' => 'FitVids.js',
-    'website' => 'https://github.com/davatron5000/FitVids.js',
-    'version' => '1.0',
-    'js' => array(
-      'jquery.fitvids.js' => array(),
-    ),
-  );
-  return $libraries;
 }
 
 /**
