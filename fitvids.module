@@ -10,34 +10,6 @@ define("FITVIDS_PLUGIN_URL", 'https://raw.github.com/davatron5000/FitVids.js/mas
 define("FITVIDS_PLUGIN_FILENAME", 'jquery.fitvids.js');
 
 /**
- * Implements hook_help().
- *
- * Displays help and module information.
- *
- * @param path
- *   Which path of the site we're using to display help
- * @param arg
- *   Array that holds the current path as returned from arg() function
- */
-function fitvids_help($path, $arg) {
-  switch ($path) {
-    case "admin/help#fitvids":
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t("FitVids is a jQuery plugin for fluid width video embeds.") . '</p>';
-      $output .= '<p>' . t("It's useful if you are using a responsive theme and want the videos to scale.") . '</p>';
-      $output .= '<p>' . t("By default it supports Vimeo, YouTube and Kickstarter.") . '</p>';
-      $output .= '<h3>' . t('jQuery plugin') . '</h3>';
-      $output .= '<p>' . t("Download the plugin from " . FITVIDS_PLUGIN_URL) . '</p>';
-      $output .= '<h3>' . t('Further info') . '</h3>';
-      $output .= '<p>' . t("There is an explanatory blog post at http://daverupert.com/2011/09/responsive-video-embeds-with-fitvids/") . '</p>';
-      $output .= '<p>' . t("See the code at https://github.com/davatron5000/FitVids.js/") . '</p>';
-      return $output;
-      break;
-  }
-}
-
-/**
  * Implements hook_permission().
  */
 function fitvids_permission() {
