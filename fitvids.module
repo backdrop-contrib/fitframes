@@ -4,11 +4,6 @@
  * Includes the FitVids.js jQuery plugin for fluid width video embeds.
  */
 
-// Constants
-define("FITVIDS_DEFAULT_REGIONS", 'body');
-define("FITVIDS_PLUGIN_URL", 'https://raw.github.com/davatron5000/FitVids.js/master/jquery.fitvids.js');
-define("FITVIDS_PLUGIN_FILENAME", 'jquery.fitvids.js');
-
 /**
  * Implements hook_permission().
  */
@@ -36,6 +31,21 @@ function fitvids_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Implements hook_library_info().
+ */
+function fitvids_library_info() {
+  $libraries['fitvids'] = array(
+    'title' => 'FitVids',
+    'website' => 'https://raw.github.com/davatron5000/FitVids.js/master/jquery.fitvids.js',
+    'version' => '1.1',
+    'js' => array(
+      backdrop_get_path('module', 'fitvids') . '/js/jquery.fitvids.js' => array(),
+    ),
+  );
+  return $libraries;
 }
 
 /**
@@ -71,7 +81,7 @@ function fitvids_admin_settings($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('Simplify media_youtube and media_vimeo markup'),
     '#default_value' => $config->get('simplifymarkup'),
-    '#description' => t('Older versions of the media_youtube and media_vimeo modules wrap videos in HTML which may stop FitVids working properly. Enable this to remove the unneccesary markup.'),
+    '#description' => t('Older versions of the media_youtube and media_vimeo modules wrap videos in HTML which may stop FitVids working properly. Enable this to remove the unnecessary markup.'),
   );
 
   $form['actions']['#type'] = 'actions';
