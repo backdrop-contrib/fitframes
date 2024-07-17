@@ -92,7 +92,7 @@ function fitframes_preprocess_page(&$variables) {
 
   $custom_domains = $config->get('custom_domains');
   $sources = array();
-  if (!empty(trim($custom_domains))) {
+  if (!empty($custom_domains) && !empty(trim($custom_domains))) {
     $sources = explode(PHP_EOL, $custom_domains);
     if (count($sources) > 0) {
       foreach ($sources as $key => $value) {
