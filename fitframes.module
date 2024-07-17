@@ -1,0 +1,125 @@
+<?php
+/**
+ * @file
+ * Includes fitFrames.js for fluid width video embeds.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function fitframes_permission() {
+  return array(
+    'administer fitframes' => array(
+      'title' => t('Administer the fitFrames module'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function fitframes_menu() {
+  $items = array();
+
+  $items['admin/config/media/fitframes'] = array(
+    'title' => 'fitFrames',
+    'description' => 'Configuration for fitFrames module',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('fitframes_admin_settings'),
+    'access arguments' => array('administer fitframes'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_library_info().
+ */
+function fitframes_library_info() {
+  $path = backdrop_get_path('module', 'fitframes');
+  $libraries['fitframes'] = array(
+    'title' => 'fitFrames',
+    'website' => 'https://backdropcms.org/project/fitframes',
+    'js' => array(
+      $path . '/js/fitframes.js' => array(),
+    ),
+    'css' => array(
+      $path . '/css/fitframes.css' => array(),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Configuraton form, called by backdrop_get_form()
+ * in current_posts_menu().
+ */
+function fitframes_admin_settings($form, &$form_state) {
+
+  $config = config('fitframes.settings');
+
+  $form['#config'] = 'fitframes.settings';
+  $form['fitframes_intro'] = array(
+    'markup' => '<p>fitFrames allows fluid width iframe embeds. Think video embeds, PDF embeds, and the like.</p>',
+  );
+
+  $form['custom_domains'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Custom iframe URLs'),
+    '#default_value' => $config->get('custom_domains'),
+    '#rows' => 3,
+    '#description' => t('You can apply fitFrames to iframes from specific sites by adding the domain (e.g. "youtube.com"). Use a new line for each URL. You don\'t need to add trailing slashes. Leave blank to apply fitFrames to all iframes.'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Include the fitframes.js script on every page
+ */
+function fitframes_preprocess_page(&$variables) {
+
+  // Performance: Skip this entirely for AJAX requests.
+  if (!backdrop_is_html()) {
+    return;
+  }
+  $config = config('fitframes.settings');
+
+  $custom_domains = $config->get('custom_domains');
+  $sources = array();
+  if (!empty(trim($custom_domains))) {
+    $sources = explode(PHP_EOL, $custom_domains);
+    if (count($sources) > 0) {
+      foreach ($sources as $key => $value) {
+        $sources[$key] = 'iframe[src^=\'' . trim($value) . '\']';
+      }
+    }
+    else {
+      $sources[] = 'iframe';
+    }
+  }
+  else {
+    $sources[] = 'iframe';
+  }
+
+  backdrop_add_library('fitframes', 'fitframes');
+
+  // Export the variables to Backdrop.settings.
+  backdrop_add_js(array('fitframes' => array(
+    'sources' => $sources,
+  )), 'setting');
+}
+
+/**
+* Implements hook_config_info().
+*/
+function fitframes_config_info() {
+  $prefixes['fitframes.settings'] = array(
+    'label' => t('fitFrames'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
+}

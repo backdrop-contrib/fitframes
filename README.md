@@ -1,50 +1,37 @@
-# FitVids Backdrop module
+# fitFrames
 
 ## Description
 
-This module uses the FitVids.js library for fluid width video embeds. It supports YouTube, Vimeo, Blip.tv and Kickstarter by default, and you should be able to use it with other video providers. You don't need it for pure HTML5 videos.
-
-It's useful if you are using a responsive theme and want the videos to scale.
-
-![FitVids](https://github.com/backdrop-contrib/fitvids/blob/1.x-1.x/images/fitvids.jpg "FitVids example")
+This module implements a small Javascript to make iframes responsive, while
+trying to maintain the aspect-ratio of the iframe container. This can be useful
+for embedded videos, PDFs, and other iframed content.
 
 ## Configuration
 
-### jQuery selectors
+### Custom domains
 
-You can usually use the defaults. It assumes that you'll want to apply it to all videos on the page.
-
-If your theme uses a different class or id, or you only want to target certain videos, you can specify that class/id in the video containers field. You can use any valid jQuery selector, e.g.
-
-`#my-video-container`
-
-`.content`
-
-`body`
-
-You can specify as many containers as you want.
-
-
-### Video providers
-
-Not all players will work with FitVids, but you can try it out by adding the domain (in the Custom iframe URLs field).
-
+Leave blank to apply fitFrames to all iframe elements, or add one or more custom
+domains to apply only to certain domains, such as `youtube.com` or
+`docs.google.com`.
 
 ## Issues
 
 Bugs and Feature requests should be reported in the
-[Issue Queue](https://github.com/backdrop-contrib/fitvids/issues)
+[Issue Queue](https://github.com/backdrop-contrib/fitframes/issues)
 
 ## Current Maintainers
 
-- [Laryn Kragt Bakker](https://github.com/laryn) - [CEDC.org](https://cedc.org)
+- [Laryn Kragt Bakker](https://github.com/laryn)
 
 ## Credits
 
-- Ported to Backdrop CMS by [Laryn Kragt Bakker](https://github.com/laryn) - [CEDC.org](https://cedc.org).
-- Maintained for Drupal by [Derek Ahmedzai](https://github.com/derekahmedzai).
+- Written for Backdrop CMS by [Laryn Kragt Bakker](https://github.com/laryn).
+- This module is a fork of the [FitVids](https://github.com/backdrop-contrib/fitvids)
+  module. The original FitVids script was written by @davatron5000 and this module
+  [takes direction from his newer Web Components version](https://github.com/davatron5000/fit-vids/issues/1).
 
 ## License
 
-This project is GPL v2 software. See the [LICENSE.txt](https://github.com/backdrop-contrib/fitvids/blob/1.x-1.x/LICENSE.txt) file in this directory for
-complete text.
+This project is GPL v2 software. See the
+[LICENSE.txt](https://github.com/backdrop-contrib/fitframes/blob/1.x-1.x/LICENSE.txt)
+file in this directory for complete text.

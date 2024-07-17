@@ -1,0 +1,5 @@
+name = fitFrames
+description = Javascript for fluid width iframe embeds.
+backdrop = 1.x
+type = module
+configure = admin/config/media/fitframes
