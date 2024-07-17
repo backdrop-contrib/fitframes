@@ -37,10 +37,12 @@ function fitframes_menu() {
  * Implements hook_library_info().
  */
 function fitframes_library_info() {
+  $module_info = system_get_info('module', 'fitframes');
   $path = backdrop_get_path('module', 'fitframes');
   $libraries['fitframes'] = array(
     'title' => 'fitFrames',
     'website' => 'https://backdropcms.org/project/fitframes',
+    'version' => $module_info['version'],
     'js' => array(
       $path . '/js/fitframes.js' => array(),
     ),
