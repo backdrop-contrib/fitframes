@@ -63,7 +63,7 @@ function fitframes_admin_settings($form, &$form_state) {
 
   $form['#config'] = 'fitframes.settings';
   $form['fitframes_intro'] = array(
-    'markup' => '<p>fitFrames allows fluid width iframe embeds. Think video embeds, PDF embeds, and the like.</p>',
+    '#markup' => '<p>fitFrames allows fluid width iframe embeds. Think video embeds, PDF embeds, and the like.</p>',
   );
 
   $form['custom_domains'] = array(
