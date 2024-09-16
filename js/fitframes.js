@@ -16,10 +16,12 @@
       var $height = null;
 
       document.querySelectorAll($videoSources.join(",")).forEach((video) => {
-        $width = video.getAttribute("width").replace(/\D/g, '');
-        $height = video.getAttribute("height").replace(/\D/g, '');
-
-        video.style.aspectRatio = `${$width}/${$height}`;
+        $height = video.getAttribute("height").replace(/\D/g, '');;
+        $width = video.getAttribute("width");
+        if (!$width.includes("%") && $height !== "0") {
+          $width = $width.replace(/\D/g, '');
+          video.style.aspectRatio = `${$width}/${$height}`;
+        }
         video.style.maxWidth = "100%";
         video.style.height = "auto";
       });
