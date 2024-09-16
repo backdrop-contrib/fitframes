@@ -18,7 +18,7 @@
       document.querySelectorAll($videoSources.join(",")).forEach((video) => {
         $height = video.getAttribute("height").replace(/\D/g, '');;
         $width = video.getAttribute("width");
-        if (!$width.includes("%")) {
+        if (!$width.includes("%") && $height !== "0") {
           $width = $width.replace(/\D/g, '');
           video.style.aspectRatio = `${$width}/${$height}`;
         }
