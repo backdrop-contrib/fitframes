@@ -12,15 +12,15 @@
         $videoSources = ['iframe'];
       }
 
-      var $width = null;
-      var $height = null;
-
       document.querySelectorAll($videoSources.join(",")).forEach((video) => {
-        $height = video.getAttribute("height").replace(/\D/g, '');;
-        $width = video.getAttribute("width");
-        if (!$width.includes("%") && $height !== "0") {
+        var $height = video.getAttribute("height") || '';
+        var $width = video.getAttribute("width") || '';
+        if (!$width.includes("%") && !$height.includes("%")) {
+          $height = $height.replace(/\D/g, '');
           $width = $width.replace(/\D/g, '');
-          video.style.aspectRatio = `${$width}/${$height}`;
+          if (Number($width) > 0 && Number($height) > 0) {
+            video.style.aspectRatio = `${$width}/${$height}`;
+          }
         }
         video.style.maxWidth = "100%";
         video.style.height = "auto";
